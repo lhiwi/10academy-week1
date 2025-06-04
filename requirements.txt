@@ -1,0 +1,30 @@
+# requirements.txt
+# TA-Lib (new version)
+https://github.com/cgohlke/talib-build/releases/download/v0.6.3/ta_lib-0.6.3-cp311-cp311-win_amd64.whl
+
+# Core
+pandas>=2.1
+numpy>=1.26.4
+pandas_ta>=0.3.14b0
+
+# Jupyter and Notebook Support
+jupyter==1.0.0
+ipykernel==6.29.4
+ipython==8.24.0
+
+# Finance
+yfinance>=0.2
+pynance>=1.0  # Updated from 1.2 to 1.0
+
+# NLP
+nltk>=3.8
+textblob>=0.17
+scikit-learn>=1.3
+
+# Visualization
+matplotlib>=3.7
+seaborn>=0.12
+
+# Testing
+pytest>=7.4
+pytest-cov>=4.1

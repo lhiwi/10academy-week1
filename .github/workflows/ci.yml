@@ -1,0 +1,36 @@
+name: Python ci.yml
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: Install TA-Lib
+      run: |
+        $url = "https://github.com/cgohlke/talib-build/releases/download/v0.6.3/ta_lib-0.6.3-cp311-cp311-win_amd64.whl"
+        $output = "ta_lib-0.6.3-cp311-cp311-win_amd64.whl"  # Keep original filename
+        Invoke-WebRequest -Uri $url -OutFile $output
+        pip install $output
+        
+    - name: Install Python dependencies
+      run: |
+        pip install numpy==1.26.4
+        pip install pandas_ta==0.3.14b0
+        pip install -r requirements.txt
+        
+    - name: Install NLTK data
+      run: |
+        python -c "import nltk; nltk.download('punkt'); nltk.download('vader_lexicon')"
+        
+    - name: Run tests
+      run: |
+        pytest tests/ --cov=src --cov-report=xml
