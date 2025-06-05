@@ -13,17 +13,31 @@
 
 ## Project Structure
 ├── .github/workflows/ # CI/CD pipelines
-├── data/ # Financial datasets
-├── notebooks/ # Jupyter notebooks
-│ └── eda.ipynb # EDA implementation
-├── plots/ # Generated visualizations
-├── reports/ # Documentation
-├── src/ # Source code
+├── .vscode
+        ├── settings.json
+├── data/
+│ ├── cleaned_analyst_ratings.pkl # Processed news sentiment data
+│ └── AAPL_with_indicators.pkl # Technical indicators for AAPL
+│
+├── plots/
+│ ├── AAPL_rsi14.png # RSI visualization
+│ ├── AAPL_macd.png # MACD components
+│ ├── AAPL_returns.png # Daily returns
+│ ├── AAPL_volatility.png # 20-day rolling volatility
+│ └── AAPL_sentiment_correlation_heatmap.png # Correlation heatmap
+│
+├── notebooks/ # All development scripts
+│ ├── Sentiment_analysis.ipynb # News cleaning & sentiment analysis
+│ ├── Technical_analysis.ipynb # Stock indicators using TA-Lib
+│ └── Correlation.ipynb # Merge and correlation analysis
+│
+├── src/
+│ └── app.py # Streamlit dashboard
 ├── tests/ # Test cases
-├── .gitignore
-├── LICENSE
+├── .gitignore # Ignore patterns
+├── .gitattributes # for large files
+├── requirements.txt # Python dependencies
 ├── README.md
-└── requirements.txt
 
 ## Setup & Execution
 ```bash
@@ -58,6 +72,38 @@ Output:
         - Technical charts for each stock
         - Indicator correlation matrices
 
-### Next Steps
-- Task 3: News-stock correlation analysis
-- Final report preparation
+## Task 3: News Sentiment–Stock Correlation
+
+**Objective**: Quantify the relationship between news sentiment and daily stock returns.
+
+### Inputs:
+- Cleaned news headlines with timestamps
+- Stock data with indicators and daily returns
+
+### Processing:
+- Sentiment Scoring:
+  - Compute polarity using TextBlob on each headline
+  - Aggregate daily average sentiment
+
+- Temporal Alignment:
+  - Merge sentiment with stock data
+  - Apply 1-day lag to sentiment scores
+
+- Correlation Analysis:
+  - Calculate Pearson correlation between lagged sentiment and:
+    - Daily returns
+    - RSI / Volatility / Momentum indicators
+
+### Output:
+- Correlation coefficient (sentiment vs return)
+- Visualizations:
+  - `sentiment_vs_return.png` – Scatter plot of sentiment vs return
+  - `correlation_matrix.png` – Heatmap of all metric correlations
+  - `sentiment_returns_trend.png` – Sentiment and return time-series plot
+- A dashboard using streamlit
+
+### Run:
+```bash
+python scripts/task3_correlation.py
+streamlit run app.py
+
