@@ -1,6 +1,8 @@
 import talib
 import numpy as np
 import pandas as pd
+import pandas_ta as ta
+
 
 def test_talib_indicators():
     """Test TA-Lib indicator calculations"""
