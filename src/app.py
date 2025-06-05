@@ -50,7 +50,7 @@ if len(date_range) == 2:
     merged = merged[(merged['date'] >= date_range[0]) & (merged['date'] <= date_range[1])]
 
 # Correlation Heatmap 
-st.subheader("📊 Correlation Heatmap (Lagged Sentiment)")
+st.subheader(" Correlation Heatmap (Lagged Sentiment)")
 corr_cols = ['daily_return', 'volatility20', 'rsi14', 'macd', 'sentiment_polarity_lag1']
 corr_matrix = merged[corr_cols].dropna().corr()
 fig1, ax1 = plt.subplots(figsize=(8, 6))
@@ -59,7 +59,7 @@ ax1.set_title(f"Correlation Matrix for {sample_ticker}")
 st.pyplot(fig1)
 
 # Scatter Plot 
-st.subheader("📉 Lagged Sentiment vs Daily Return")
+st.subheader("Lagged Sentiment vs Daily Return")
 fig2, ax2 = plt.subplots(figsize=(6, 4))
 sns.scatterplot(
     data=merged.dropna(subset=['sentiment_polarity_lag1', 'daily_return']),
@@ -71,5 +71,5 @@ ax2.set_title(f"{sample_ticker}: Lagged Sentiment vs Daily Return")
 st.pyplot(fig2)
 
 # Raw Data Preview 
-st.subheader("🔍 Preview Merged Data")
+st.subheader(" Preview Merged Data")
 st.dataframe(merged.head(20))
