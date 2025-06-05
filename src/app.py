@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import pickle
 from pathlib import Path
 
-st.title("📈 News Sentiment vs Stock Movement Dashboard")
+st.title(" News Sentiment vs Stock Movement Dashboard")
 st.markdown("""
 This dashboard visualizes how daily news sentiment may relate to stock returns, using lagged correlation analysis.
 """)
